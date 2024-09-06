@@ -1,23 +1,29 @@
-import { Button, Table, TableCaption, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr } from "@chakra-ui/react";
+import { Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { GetAllTodo } from "./lib/todo";
 import { Todo } from "./domain/todo";
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [isLoading, setisLoading] = useState(true);
   useEffect(() => {
-    const getAlltodos = async () => {
+    const getAlltodo = async () => {
       const todosData = await GetAllTodo();
-      console.log(todosData);
       setTodos(todosData);
+      setisLoading(false);
     };
 
-    getAlltodos();
+    getAlltodo();
   }, []);
+
+  if (isLoading) {
+    return <p>Loading</p>;
+  }
   return (
     <>
+      <h1 data-testid="title">TODOリスト</h1>
       <TableContainer>
-        <Table variant="simple">
+        <Table variant="simple" data-testid="table">
           <Thead>
             <Tr>
               <Th>Title</Th>
