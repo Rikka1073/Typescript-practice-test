@@ -9,6 +9,7 @@ function App() {
   useEffect(() => {
     const getAlltodo = async () => {
       const todosData = await GetAllTodo();
+      console.log(todosData);
       setTodos(todosData);
       setisLoading(false);
     };
