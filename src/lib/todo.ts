@@ -2,7 +2,7 @@ import { Todo } from "../domain/todo";
 import { supabase } from "../utils/supabase";
 
 export async function GetAllTodo(): Promise<Todo[]> {
-  const response = await supabase.from("todos").select("");
+  const response = await supabase.from("todos").select("*");
 
   if (response.error) {
     throw new Error(response.error.message);
